@@ -10,7 +10,7 @@ use onebone\economyapi\EconomyAPI;
 Class Setitemname implements Form
 {
     /** @var Item */
-    public $item;
+    private $item;
 
     public function __construct($item)
     {

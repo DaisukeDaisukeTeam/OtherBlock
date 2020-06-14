@@ -4,13 +4,12 @@ namespace xtakumatutix\otherb;
 
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerInteractEvent;
-use pocketmine\block\Block;
 use pocketmine\item\enchantment\EnchantmentEntry;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use xtakumatutix\otherb\enchantment\Enchanter;
-use xtakumatutix\otherb\Form\Bed;
 use xtakumatutix\otherb\Form\Anvil;
+use xtakumatutix\otherb\Form\Bed;
 use xtakumatutix\otherb\Form\Brewing;
 use xtakumatutix\otherb\form\EnchantmentTable;
 use xtakumatutix\otherb\utils\EnchantmentUtils;
@@ -71,13 +70,11 @@ class EventListener implements Listener
 
     public function onEnchant(Player $player, Item $targetItem, int $enchantmentStrength = 2, int $bookshelfAmount = 15)
     {
-        //$consumeitem = clone $this->consumeitem;
         $consumeitem = Item::get(Item::DYE, 4, $enchantmentStrength);
         if (!$player->getInventory()->contains($consumeitem)) {
             $player->sendMessage("エンチャント致します為の媒体は不足しております為、エンチャントをすることは出来ません。");
             return;
         }
-        //$targetItem = $player->getInventory()->getItemInHand();
         if (!EnchantmentUtils::isCanEnchant($targetItem)) {
             $player->sendMessage("このアイテムにエンチャントすることは出来ません。");
             return;
@@ -86,11 +83,6 @@ class EventListener implements Listener
             $player->sendMessage("このアイテムには既にエンチャントが付与されているため、エンチャントすることは出来ません。");
             return;
         }
-
-        /*if ($enchantmentStrength > $consumeitem->getCount()) {
-            $player->sendMessage("エンチャントの為の媒体の個数に関しましては、不足しております為、エンチャントすることは出来ません。");
-            return;
-        }*/
 
         $seed = EnchantmentUtils::$seeds[$player->getName()] ?? mt_rand();
         if (!isset(EnchantmentUtils::$seeds[$player->getName()])) {
@@ -111,12 +103,5 @@ class EventListener implements Listener
         }
 
         $player->sendForm(new EnchantmentTable($Enchantments));
-
-        /*$level = $player->getXpLevel();
-        $cost = $this->entries[$i]->getCost();
-        if($level < $cost){
-            $player->sendMessage("エンチャントの為に必要なレベルに関しましては、不足しております為、エンチャント致します事は出来ません。");
-            return;
-        }*/
     }
 }

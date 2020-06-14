@@ -42,12 +42,12 @@ class Enchantment implements Form
 
             $level = $player->getXpLevel();
             $cost = $this->enchantmentResult[$data]->getCost();
-            if($level < $cost){
+            if ($level < $cost) {
                 $player->sendMessage("エンチャントの為に必要なレベルに関しましては、不足しております為、エンチャント致します事は出来ません。");
                 return;
             }
 
-            $player->subtractXpLevels($enchantmentStrength+1);
+            $player->subtractXpLevels($enchantmentStrength + 1);
 
             EnchantmentUtils::resetSeed($player->getName());
 

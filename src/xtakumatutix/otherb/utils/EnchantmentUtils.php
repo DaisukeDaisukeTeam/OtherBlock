@@ -196,29 +196,6 @@ class EnchantmentUtils
         return 0;
     }
 
-    /**
-     * @param Enchantment[] $ent1
-     * @param Enchantment[] $ent2
-     *
-     * @return bool
-     */
-    public static function checkEnts(array $ent1, array $ent2)
-    {
-        foreach ($ent1 as $enchantment) {
-            $hasResult = false;
-            foreach ($ent2 as $enchantment1) {
-                if (self::equals($enchantment, $enchantment1)) {
-                    $hasResult = true;
-                    continue;
-                }
-            }
-            if (!$hasResult) {
-                return false;
-            }
-        }
-        return true;
-    }
-
     public static function equals(EnchantmentInstance $ent, EnchantmentInstance $ent1)
     {
         if ($ent->getId() == $ent1->getId() && $ent->getLevel() == $ent1->getLevel() && $ent->getType()->getRarity() === $ent1->getType()->getRarity()) {
@@ -229,17 +206,11 @@ class EnchantmentUtils
 
     public static function getRandomName()
     {
-        /*$count = mt_rand(3, 6);
-        $set = [];
-        while(count($set) < $count){
-            $set[] = self::$words[mt_rand(0, count(self::$words) - 1)];
-        }
-        return implode(" ", $set);*/
         return (string)(mt_rand(0, 100)." ".mt_rand(0, 100)." ".mt_rand(0, 100));
     }
 
     public static function isCanEnchant(Item $item): bool
-    {//
+    {
         if ($item->getId() == Item::BOOK) {
             return true;
         } elseif ($item instanceof Armor) {
@@ -280,7 +251,7 @@ class EnchantmentUtils
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }
 
-    public static function resetSeed(String $name)
+    public static function resetSeed(string $name)
     {
         unset(self::$seeds[$name]);
     }

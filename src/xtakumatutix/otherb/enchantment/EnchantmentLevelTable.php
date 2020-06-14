@@ -1,14 +1,10 @@
 <?php
 
- namespace xtakumatutix\otherb\enchantment;
+namespace xtakumatutix\otherb\enchantment;
 
 use pocketmine\item\Armor;
 use pocketmine\item\Axe;
-use pocketmine\item\ChainBoots;
-use pocketmine\item\ChainHelmet;
 use pocketmine\item\DiamondAxe;
-use pocketmine\item\DiamondBoots;
-use pocketmine\item\DiamondHelmet;
 use pocketmine\item\DiamondHoe;
 use pocketmine\item\DiamondPickaxe;
 use pocketmine\item\DiamondShovel;
@@ -16,22 +12,16 @@ use pocketmine\item\DiamondSword;
 use pocketmine\item\enchantment\Enchantment;
 use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\GoldAxe;
-use pocketmine\item\GoldBoots;
-use pocketmine\item\GoldHelmet;
 use pocketmine\item\GoldHoe;
 use pocketmine\item\GoldPickaxe;
 use pocketmine\item\GoldShovel;
 use pocketmine\item\GoldSword;
 use pocketmine\item\IronAxe;
-use pocketmine\item\IronBoots;
-use pocketmine\item\IronHelmet;
 use pocketmine\item\IronHoe;
 use pocketmine\item\IronPickaxe;
 use pocketmine\item\IronShovel;
 use pocketmine\item\IronSword;
 use pocketmine\item\Item;
-use pocketmine\item\LeatherBoots;
-use pocketmine\item\LeatherCap;
 use pocketmine\item\Pickaxe;
 use pocketmine\item\Shovel;
 use pocketmine\item\StoneAxe;
@@ -283,21 +273,25 @@ class EnchantmentLevelTable
             EnchantmentUtils::isEnableEnchantment(Enchantment::UNBREAKING, $enchantmentIds);
         }
 
-        foreach($enchantmentIds as $enchantmentId) {
+        foreach ($enchantmentIds as $enchantmentId) {
             $enchantment = Enchantment::getEnchantment($enchantmentId);
             if ($enchantment === null) {
                 $enchantment = new Enchantment($enchantmentId, "", 0, 0, 0, count(self::$map[$enchantmentId]));
             }
-            var_dump($modifiedLevel);
             $ranges = self::$map[$enchantmentId];
             $i = 0;
+            $result1 = null;
             /** @var Range $range */
-            foreach($ranges as $range) {
+            foreach ($ranges as $range) {
                 $i++;
                 if ($range->isInRange($modifiedLevel)) {
-                    $result[] = new EnchantmentInstance($enchantment, $i);
+                    $result1 = new EnchantmentInstance($enchantment, $i);
                 }
             }
+            if ($result1 === null) {
+                continue;
+            }
+            $result[] = $result1;
         }
         return $result;
     }
