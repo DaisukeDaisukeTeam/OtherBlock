@@ -33,10 +33,10 @@ class Enchanter
             $result = [];
             $level = $levels[$i];
 
-            $randEnchantability = 1 + mt_rand(0, ($enchantAbility / 4 + 1) - 1) + mt_rand(0, ($enchantAbility / 4 + 1) - 1);
-            $k = $level + $randEnchantability;
+            $k = $level + mt_rand(0, ($enchantAbility / 4 + 1) - 1) + mt_rand(0, ($enchantAbility / 4 + 1) - 1) + 1;
+            //$k = $level + $k;
             $bonus = 1 + (EnchantmentUtils::randomFloat() + EnchantmentUtils::randomFloat() - 1) * 0.15;
-            $modifiedLevel = round($k * $bonus + 0.5);
+            $modifiedLevel = round($k * $bonus);
             if ($modifiedLevel < 1) $modifiedLevel = 1;
             $possible = EnchantmentLevelTable::getPossibleEnchantments($item, $modifiedLevel);
 

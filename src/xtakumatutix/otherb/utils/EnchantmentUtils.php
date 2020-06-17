@@ -82,10 +82,19 @@ class EnchantmentUtils
 
     public static function removeConflictEnchantment(EnchantmentInstance $enchantment, array $enchantments)
     {
+        $array = [
+            Enchantment::PROTECTION,
+            Enchantment::FIRE_PROTECTION,
+            Enchantment::BLAST_PROTECTION,
+            Enchantment::PROJECTILE_PROTECTION,
+
+        ];
+
+        shuffle($array);
         if (count($enchantments) > 0) {
-            foreach ($enchantments as $e) {
+            foreach ($enchantments as $key => $e) {
                 $id = $e->getId();
-                if ($id == $enchantment->getId()) {
+                if ($id === $enchantment->getId()) {
                     unset($enchantments[$id]);
                     continue;
                 }
@@ -109,6 +118,12 @@ class EnchantmentUtils
                     unset($enchantments[$id]);
                     continue;
                 }
+
+
+
+                /*if (($id === Enchantment::PROTECTION and $enchantment->getId() === Enchantment::FIRE_PROTECTION) or ($id === Enchantment::PROTECTION and $enchantment->getId() === Enchantment::BLAST_PROTECTION) or ($id === Enchantment::PROTECTION and $enchantment->getId() === Enchantment::BLAST_PROTECTION)) {
+
+                }*/
             }
         }
         $result = [];
@@ -246,7 +261,7 @@ class EnchantmentUtils
         return mb_strtolower($switch) === "on";
     }
 
-    public static function randomFloat($min = 0, $max = 1)
+    public static function randomFloat($min = 0, $max = 1): float
     {
         return $min + mt_rand() / mt_getrandmax() * ($max - $min);
     }

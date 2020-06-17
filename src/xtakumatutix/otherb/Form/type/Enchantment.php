@@ -5,6 +5,7 @@ namespace xtakumatutix\otherb\Form\type;
 use onebone\economyapi\EconomyAPI;
 use pocketmine\form\Form;
 use pocketmine\item\enchantment\EnchantmentEntry;
+use pocketmine\item\enchantment\EnchantmentInstance;
 use pocketmine\item\Item;
 use pocketmine\Player;
 use xtakumatutix\otherb\utils\EnchantmentUtils;
@@ -35,6 +36,8 @@ class Enchantment implements Form
         if ($data === true) {
             $enchantmentStrength = $this->level;
             $targetItem = $player->getInventory()->getItemInHand();
+
+            /** @var EnchantmentInstance[] $EnchantmentInstances */
             $EnchantmentInstances = $this->enchantmentResult[$enchantmentStrength]->getEnchantments();
             foreach ($EnchantmentInstances as $EnchantmentInstance) {
                 $targetItem->addEnchantment($EnchantmentInstance);

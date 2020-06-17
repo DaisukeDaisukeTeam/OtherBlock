@@ -235,7 +235,6 @@ class EnchantmentLevelTable
                 EnchantmentUtils::isEnableEnchantment(Enchantment::RESPIRATION, $enchantmentIds);
                 EnchantmentUtils::isEnableEnchantment(Enchantment::AQUA_AFFINITY, $enchantmentIds);
             }
-            var_dump($enchantmentIds);//
         } elseif ($item instanceof Sword) {
             EnchantmentUtils::isEnableEnchantment(Enchantment::SHARPNESS, $enchantmentIds);
             EnchantmentUtils::isEnableEnchantment(Enchantment::SMITE, $enchantmentIds);
