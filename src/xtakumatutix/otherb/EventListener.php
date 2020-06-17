@@ -11,7 +11,7 @@ use xtakumatutix\otherb\enchantment\Enchanter;
 use xtakumatutix\otherb\Form\Anvil;
 use xtakumatutix\otherb\Form\Bed;
 use xtakumatutix\otherb\Form\Brewing;
-use xtakumatutix\otherb\form\EnchantmentTable;
+use xtakumatutix\otherb\Form\EnchantmentTable;
 use xtakumatutix\otherb\utils\EnchantmentUtils;
 
 class EventListener implements Listener
